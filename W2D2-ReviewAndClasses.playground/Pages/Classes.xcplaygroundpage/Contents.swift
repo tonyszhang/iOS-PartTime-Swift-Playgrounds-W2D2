@@ -5,7 +5,7 @@
 //: ## Classes and inheritence
 //:
 //: We saw in the last playground how to create functions, now we're going to create objects. Objects are a thing composed of variables and functions that operate on those variables.
-//: Here is an example object:
+//: Here is an example class:
 
 
 class Box {
@@ -50,20 +50,32 @@ box1.area()
 //: Bicycles should also have two functions. `gearUp()` and `gearDown()`, which increase and decrease the value in `currentGear`.
 
 
+class Bicycle {
+    var numberOfGears: Int = 5
+    var currentGear: Int = 3
+    
+    func gearUp() {
+        currentGear = currentGear + 1
+    }
+    func gearDown() {
+        currentGear = currentGear - 1
+    }
+}
+
 
 
 
 //: Test your bicycle out by uncommenting the following code:
  
-//var myBike = Bicycle()
-//
-//myBike.numberOfGears = 16 // upgrade!
-//myBike.gearUp()
-//myBike.gearUp()
-//myBike.gearDown()
-//myBike.gearUp()
-//
-//print("my bike is in the \(myBike.currentGear)rd gear")
+var myBike = Bicycle()
+
+myBike.numberOfGears = 16 // upgrade!
+myBike.gearUp()
+myBike.gearUp()
+myBike.gearDown()
+myBike.gearUp()
+
+print("my bike is in the \(myBike.currentGear)rd gear")
 
 
 //: ## Challenge 2
@@ -102,14 +114,30 @@ brightBulb.watts
 //:
 //: 1. Remove the default value for `numberOfGears`
 //: 2. Make `numberOfGears` a `let` instead of a `var`
-//: 3. Add an init method, that takes a single `Double` parameter called `gears`.
+//: 3. Add an init method, that takes a single `Int` parameter called `gears`.
 //: 4. The init method sets numberOfGears to the value in `gears`
 //:
 //: Hint: don't forget to supply a number of gears when you create your bicycles!
 
+class Bicycle2 {
+    let numberOfGears: Int
+    var currentGear: Int = 3
+    
+    init(gears: Int) {
+        numberOfGears = gears
+    }
+    
+    func gearUp() {
+        currentGear = currentGear + 1
+    }
+    func gearDown() {
+        currentGear = currentGear - 1
+    }
+}
 
 
 
+var tonyBike = Bicycle2(gears: 7)
 
 
 
@@ -124,9 +152,32 @@ brightBulb.watts
 //: Then, re-write the `area()` method to include `depth` in the calculation. To do this you'll need to use the "override" keyword before `func`, but Xcode should suggest this to you.
 //:
 //: The syntax for subclassing can be found in the Swift Cheat Sheet included with this Playground.
-//:
-//: Hint: height * width * depth = the area of a cube
 
+//: Then create a new function that calculates the volume
+//:
+//: Hint: height * width * depth = the volume of a cube
+
+
+class Cube: Box {
+    var depth: Double = 0.0
+    
+    override func area() -> Double {
+        return height * width
+    }
+    
+    func volume() -> Double {
+        return self.area() * depth
+    }
+
+}
+
+
+var dopeCube = Cube()
+dopeCube.height = 5
+dopeCube.width = 4
+dopeCube.depth = 10
+dopeCube.area()
+dopeCube.volume()
 
 
 
